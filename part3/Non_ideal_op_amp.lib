@@ -1,0 +1,26 @@
+OP-Amp subcircuit
+
+* Circuit Description
+* We will used voltage control current source and voltage control voltage source
+* to make a small signal model
+
+.subckt small_signal_opamp 1 2 4
+* conections:			   | | |
+*					  output | |
+*					 +ve input |
+*					   -ve input
+
+
+Ginput 0 3 2 4 10
+Iopen1 2 0 0 ; redundant connection made at +ve input terminal
+Iopen2 4 0 0 ; redundant connection made at -ve input terminal
+
+* Circuit elements to make it non-ideal with limited BW
+R1 3 0 1k
+C1 3 0 159.15n
+
+* Assume single ended output opamp ==> the second end is grounded
+* The gain will be 1 because we need it as a buffer
+Eopamp 1 0 3 0 1
+
+.ends small_signal_opamp
